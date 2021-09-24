@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-export const ContactList = styled.div`
-    width: 250px;
-    color: white;
-`;
-
 export const Navbar = styled.nav`
     background-color: rgba(20, 20, 20, 0.8);
     height: 100px;
