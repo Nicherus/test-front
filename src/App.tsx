@@ -5,7 +5,8 @@ import {
 } from 'react-router-dom';
 
 import GlobalStyle from './assets/styles/globals';
-import Dashboard from './pages/Dashboard/Dashboard';
+import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 
 export default function List () {
   return (
@@ -13,9 +14,8 @@ export default function List () {
       <GlobalStyle />
         <Router>
           <Switch>
-            <Route path='/'>
-              <Dashboard />
-            </Route>
+            <Route path='/' component={Dashboard} exact/>
+            <Route path='/profile' component={Profile} exact/>
           </Switch>
         </Router>
     </>

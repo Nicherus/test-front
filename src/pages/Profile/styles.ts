@@ -19,13 +19,18 @@ export const Form = styled.form`
         font-family: Roboto;
         font-weight: bold;
         outline: none;
+        
+        :disabled {
+            background-color: white;
+        }
     }
 `;
 
 export const Button = styled.button`
     background-color: #2AD0D2;
-    font-size: 2.8rem;
+    font-size: 2rem;
     padding: 25px;
+    margin: 10px;
     border-radius: 25px;
     color: black;
     cursor: pointer;
@@ -42,7 +47,21 @@ export const Button = styled.button`
     }
 `;
 
-export const ResultDiv = styled.div`
-    margin: 1rem;
+export const Text = styled.text`
     color: white;
+    font-size: 1.2rem;
+    margin: 3rem 0 1rem 0;
+
+    cursor: pointer;
+`;
+
+export const Container = styled.div`
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #000000;
 `;

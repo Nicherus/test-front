@@ -6,25 +6,26 @@ import LoginRegisterForm from '../../components/LoginRegisterForm';
 
 export default function Dashboard () {
 
-  const [showContactList, setShowContactList] = useState(false);
+  const [showLoginRegister, setShowLoginRegister] = useState(false);
   const [showBracketsTester, setShowBracketsTester] = useState(false);
 
-  function handleShowContactList () {
-    setShowContactList(!showContactList);
-    if(!showContactList) setShowBracketsTester(false);
+  function handleShowLoginRegister () {
+    // DUE check if it's logged, if logged go to contacts list page, else show login/register component
+    setShowLoginRegister(!showLoginRegister);
+    if(!showLoginRegister) setShowBracketsTester(false);
   }
 
   function handleShowBracketsTester () {
     setShowBracketsTester(!showBracketsTester);
-    if(!showBracketsTester) setShowContactList(false);
+    if(!showBracketsTester) setShowLoginRegister(false);
   }
 
   return (
     <>
       <Navbar>Bravi Dashboard</Navbar>
       <Container>
-        {showContactList ? <LoginRegisterForm/> : null}
-        <Button onClick={() => handleShowContactList()}>Contacts List</Button>
+        {showLoginRegister ? <LoginRegisterForm/> : null}
+        <Button onClick={() => handleShowLoginRegister()}>Contacts List</Button>
         <Button onClick={() => handleShowBracketsTester()}>Brackets Tester</Button>
         {showBracketsTester ? <BracketsTester/> : null}
       </Container>

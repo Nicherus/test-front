@@ -27,7 +27,7 @@ export const Button = styled.button`
     background-color: #2AD0D2;
     font-size: 2.8rem;
     padding: 75px;
-    border-radius: 50px;
+    border-radius: 25px;
     color: black;
     margin: 10%;
     cursor: pointer;
