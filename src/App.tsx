@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 import GlobalStyle from './assets/styles/globals';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 export default function List () {
   return (
