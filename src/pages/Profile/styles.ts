@@ -47,7 +47,7 @@ export const Button = styled.button`
     }
 `;
 
-export const Text = styled.text`
+export const Text = styled.div`
     color: white;
     font-size: 1.2rem;
     margin: 3rem 0 1rem 0;

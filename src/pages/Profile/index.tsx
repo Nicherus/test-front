@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import * as Yup from "yup";
 
 import UserContext from '../../contexts/UserContext';
 import { Button, Container, Form, Text } from './styles';
@@ -17,6 +18,11 @@ export default function Profile () {
     const [phone, setPhone] = useState('');
 
     const [loading, setLoading] = useState(false);
+
+    const validationSchemaEditProfile = Yup.object({
+        email: Yup.string().email().required('email is required'),
+        phone: Yup.number().required('phone is required').typeError('only numbers allowed for the phone')
+    });
 
     useEffect(() => {
         setLoading(true);
@@ -36,19 +42,30 @@ export default function Profile () {
     function handleEditProfile () {
         setLoading(true);
 
-        axios.put(`http://localhost:3001/user/${id}`, {
-            email,
-            phone
-        }, { headers: { 'X-Access-Token': token }})
-        .then(({ data }) => {
-            setLoading(false);
+        try {
+            validationSchemaEditProfile.validateSync({
+                email,
+                phone
+            }, { abortEarly: false })
 
-            setEmail(data.email);
-            setPhone(data.phone);
-        }).catch((err) => {
-            console.log(err);
+            axios.put(`http://localhost:3001/user/${id}`, {
+                email,
+                phone
+            }, { headers: { 'X-Access-Token': token }})
+            .then(({ data }) => {
+                setLoading(false);
+
+                alert('ok!')
+                setEmail(data.email);
+                setPhone(data.phone);
+            }).catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
+        } catch (err: any){
             setLoading(false);
-        });
+            alert(err.inner[0].message);
+        }
     }
 
     function handleDeleteUser () {

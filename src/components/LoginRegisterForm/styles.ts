@@ -43,7 +43,7 @@ export const Button = styled.button`
     }
 `;
 
-export const Text = styled.text`
+export const Text = styled.div`
     color: white;
     font-size: 1.2rem;
     text-decoration: underline;

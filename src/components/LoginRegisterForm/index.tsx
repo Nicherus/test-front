@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import * as Yup from "yup";
 
 import UserContext from '../../contexts/UserContext';
 import { Button, Form, Text } from './styles';
@@ -17,43 +18,76 @@ export default function LoginRegisterForm () {
     const [loading, setLoading] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
 
-    function handleLogin () {
+    const validationSchemaLogin = Yup.object({
+        username: Yup.string().required('username is required'),
+        password: Yup.string().required('password is required')
+    });
+
+    const validationSchemaRegister = Yup.object({
+        username: Yup.string().required('username is required'),
+        password: Yup.string().min(6).required('password is required'),
+        email: Yup.string().email().required('email is required'),
+        phone: Yup.number().required().typeError('only numbers allowed for the phone')
+    });
+
+
+    async function handleLogin () {
         setLoading(true);
 
-        axios.post(`http://localhost:3001/user/login`, {
-            username,
-            password,
-        }).then(({ data }) => {
-            setLoading(false);
+        try {
+            validationSchemaLogin.validateSync({
+                username,
+                password
+            }, { abortEarly: false })
 
-            localStorage.setItem('userId', data.id);
-            localStorage.setItem('token', data.token);
-            setUserId(data.id);
-            setToken(data.token);
-
-            history.push('/profile');
-        }).catch((err) => {
-            console.log(err);
+            axios.post(`http://localhost:3001/user/login`, {
+                username,
+                password,
+            }).then(({ data }) => {
+                setLoading(false);
+    
+                localStorage.setItem('userId', data.id);
+                localStorage.setItem('token', data.token);
+                setUserId(data.id);
+                setToken(data.token);
+    
+                history.push('/profile');
+            }).catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
+        } catch (err: any){
             setLoading(false);
-        });
+            alert(err.inner[0].message);
+        }
     }
 
     function handleRegisterUser () {
         setLoading(true);
 
-        axios.post(`http://localhost:3001/user/register`, {
-            username,
-            password,
-            email,
-            phone,
-        }).then(({ data }) => {
+        try{
+            validationSchemaRegister.validateSync({
+                username,
+                password,
+                email,
+                phone
+            }, { abortEarly: false });
+        
+            axios.post(`http://localhost:3001/user/register`, {
+                username,
+                password,
+                email,
+                phone,
+            }).then(() => {
+                setLoading(false);
+                handleLogin();
+            }).catch((err) => {
+                setLoading(false);
+            });
+        } catch (err: any){
             setLoading(false);
-            console.log(data);
-            handleLogin();
-        }).catch((err) => {
-            console.log(err);
-            setLoading(false);
-        });
+            alert(err.inner[0].message);
+        }
     }
 
     return (
