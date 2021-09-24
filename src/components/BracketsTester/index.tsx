@@ -10,16 +10,13 @@ export default function BracketsTester () {
 
     function sendData() {
         setLoading(true);
-        
+
         axios.post(`http://localhost:3001/services/brackets`, {
             "inputBrackets": inputBrackets
         }).then(({ data }) => {
             setLoading(false);
             setShowResult(true);
             setIsBracketsValid(data);
-            
-            console.log(data);
-            
         }).catch((err) => {
             console.log(err);
             setLoading(false);

@@ -1,8 +1,14 @@
-// import axios from 'axios';
-import { useState } from 'react';
+import axios from 'axios';
+import { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import UserContext from '../../contexts/UserContext';
 import { Button, Form, Text } from './styles';
 
 export default function LoginRegisterForm () {
+    const history = useHistory();
+    const { setUserId, setToken } = useContext(UserContext);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -12,12 +18,42 @@ export default function LoginRegisterForm () {
     const [showRegister, setShowRegister] = useState(false);
 
     function handleLogin () {
-        // do something
-        // after login redirect logged to other page
+        setLoading(true);
+
+        axios.post(`http://localhost:3001/user/login`, {
+            username,
+            password,
+        }).then(({ data }) => {
+            setLoading(false);
+
+            localStorage.setItem('userId', data.id);
+            localStorage.setItem('token', data.token);
+            setUserId(data.id);
+            setToken(data.token);
+
+            history.push('/profile');
+        }).catch((err) => {
+            console.log(err);
+            setLoading(false);
+        });
     }
 
     function handleRegisterUser () {
-        // do something
+        setLoading(true);
+
+        axios.post(`http://localhost:3001/user/register`, {
+            username,
+            password,
+            email,
+            phone,
+        }).then(({ data }) => {
+            setLoading(false);
+            console.log(data);
+            handleLogin();
+        }).catch((err) => {
+            console.log(err);
+            setLoading(false);
+        });
     }
 
     return (

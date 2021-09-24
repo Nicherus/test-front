@@ -4,13 +4,15 @@ import {
   Route
 } from 'react-router-dom';
 
+import { UserProvider } from './contexts/UserContext';
 import GlobalStyle from './assets/styles/globals';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 
+
 export default function List () {
   return (
-    <>
+    <UserProvider>
       <GlobalStyle />
         <Router>
           <Switch>
@@ -18,6 +20,6 @@ export default function List () {
             <Route path='/profile' component={Profile} exact/>
           </Switch>
         </Router>
-    </>
+    </UserProvider>
   );
 }

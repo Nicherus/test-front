@@ -1,16 +1,20 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import BracketsTester from '../../components/BracketsTester';
 import { Button, Container, Navbar } from './styles';
 import LoginRegisterForm from '../../components/LoginRegisterForm';
 
 export default function Dashboard () {
+  const history = useHistory();
+  const token = localStorage.getItem("token");
 
   const [showLoginRegister, setShowLoginRegister] = useState(false);
   const [showBracketsTester, setShowBracketsTester] = useState(false);
 
   function handleShowLoginRegister () {
-    // DUE check if it's logged, if logged go to contacts list page, else show login/register component
+    if(token) history.push("/profile")
+
     setShowLoginRegister(!showLoginRegister);
     if(!showLoginRegister) setShowBracketsTester(false);
   }

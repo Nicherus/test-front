@@ -51,8 +51,6 @@ export const Text = styled.text`
     color: white;
     font-size: 1.2rem;
     margin: 3rem 0 1rem 0;
-
-    cursor: pointer;
 `;
 
 export const Container = styled.div`
