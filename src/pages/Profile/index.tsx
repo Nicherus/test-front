@@ -84,11 +84,15 @@ export default function Profile () {
         });
     }
 
+    function handleChangePassword () {
+        history.push("/password");
+    }
+
     function handleLogout () {
         localStorage.clear();
         clearData();
 
-        history.push("/")
+        history.push("/");
     }
 
     return (
@@ -123,6 +127,9 @@ export default function Profile () {
                 </Button>
                 <Button type="button" onClick={() => handleLogout()} disabled={loading}>
                     logout
+                </Button>
+                <Button type="button" onClick={() => handleChangePassword()} disabled={loading}>
+                    change password
                 </Button>
                 <Text>
                     Do you want to delete your account?
