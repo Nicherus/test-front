@@ -84,7 +84,7 @@ export default function LoginRegisterForm () {
                         />
                         <input
                             placeholder="phone"
-                            type="number"
+                            type="tel"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             required

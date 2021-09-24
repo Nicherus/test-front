@@ -57,8 +57,7 @@ export default function Profile () {
         axios.delete(`http://localhost:3001/user/${id}`, { headers: { 'X-Access-Token': token }}).then(({ data }) => {
             setLoading(false);
 
-            localStorage.clear();
-            clearData();
+            handleLogout();
             alert("user deleted!");
 
             history.push("/")
@@ -68,9 +67,19 @@ export default function Profile () {
         });
     }
 
+    function handleLogout () {
+        localStorage.clear();
+        clearData();
+
+        history.push("/")
+    }
+
     return (
         <Container>
             <Form>
+                <Button type="button" onClick={() => history.push("/")} disabled={loading}>
+                    go back
+                </Button>
                 <input
                     placeholder="username"
                     type="text"
@@ -87,13 +96,16 @@ export default function Profile () {
                 />
                 <input
                     placeholder="phone"
-                    type="number"
+                    type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     required
                 />
                 <Button type="button" onClick={() => handleEditProfile()} disabled={loading}>
                     edit
+                </Button>
+                <Button type="button" onClick={() => handleLogout()} disabled={loading}>
+                    logout
                 </Button>
                 <Text>
                     Do you want to delete your account?
