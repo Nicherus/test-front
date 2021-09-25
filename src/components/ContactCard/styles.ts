@@ -10,7 +10,7 @@ export const ContainerCard = styled.div`
 
     background-color: azure;
 
-    margin: 1rem;
+    margin: 5px;
     padding: 0.5rem;
 `;
 

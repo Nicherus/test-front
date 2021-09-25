@@ -51,7 +51,7 @@ export default function LoginRegisterForm () {
                 setUserId(data.id);
                 setToken(data.token);
     
-                history.push('/profile');
+                history.push('/contacts');
             }).catch((err) => {
                 console.log(err);
                 setLoading(false);

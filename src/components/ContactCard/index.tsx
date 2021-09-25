@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 import { useState } from 'react';
 import { 
     Button, 
@@ -11,8 +11,21 @@ import {
 export default function ContactCard ({data}: any) {
     const [loading, setLoading] = useState(false);
 
-    function deleteContact() {
-        // do something
+    const token = localStorage.getItem("token");
+
+    function handleDeleteContact () {
+        setLoading(true);
+
+        axios.delete(`http://localhost:3001/contacts/${data.id}`, { headers: { 'X-Access-Token': token }}).then(({ data }) => {
+            setLoading(false);
+
+            alert("contact deleted!");
+
+            window.location.reload();
+        }).catch((err) => {
+            console.log(err);
+            setLoading(false);
+        });
     }
 
     function editContact() {
@@ -30,7 +43,7 @@ export default function ContactCard ({data}: any) {
                 <Button type="button" onClick={() => editContact()} disabled={loading}>
                     edit
                 </Button>
-                <Button type="button" onClick={() => deleteContact()} disabled={loading}>
+                <Button type="button" onClick={() => handleDeleteContact()} disabled={loading}>
                     delete
                 </Button>
             </Row>
