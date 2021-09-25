@@ -13,7 +13,7 @@ export default function Dashboard () {
   const [showBracketsTester, setShowBracketsTester] = useState(false);
 
   function handleShowLoginRegister () {
-    if(token) history.push("/profile")
+    if(token) history.push("/contacts")
 
     setShowLoginRegister(!showLoginRegister);
     if(!showLoginRegister) setShowBracketsTester(false);

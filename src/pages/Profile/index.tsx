@@ -98,7 +98,7 @@ export default function Profile () {
     return (
         <Container>
             <Form>
-                <Button type="button" onClick={() => history.push("/")} disabled={loading}>
+                <Button type="button" onClick={() => history.push("/contacts")} disabled={loading}>
                     go back
                 </Button>
                 <input
