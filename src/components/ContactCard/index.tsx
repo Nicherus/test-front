@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { 
     Button, 
     ContainerCard, 
@@ -9,6 +10,8 @@ import {
 } from './styles';
 
 export default function ContactCard ({data}: any) {
+    const history = useHistory();
+
     const [loading, setLoading] = useState(false);
 
     const token = localStorage.getItem("token");
@@ -29,7 +32,12 @@ export default function ContactCard ({data}: any) {
     }
 
     function editContact() {
-        // do something
+        history.push({
+            pathname: '/contacts/edit',
+            state: {
+                contactId: data.id
+            }
+        })
     }
 
     return (
