@@ -47,12 +47,6 @@ export const Button = styled.button`
     }
 `;
 
-export const Text = styled.div`
-    color: white;
-    font-size: 1.2rem;
-    margin: 3rem 0 1rem 0;
-`;
-
 export const Container = styled.div`
     width: 100%;
     height: 100vh;

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as Yup from "yup";
 
-import { Button, Container, Form, Text } from './styles';
+import { Button, Container, Form} from './styles';
 
 export default function ChangePassword () {
     const history = useHistory();
@@ -41,7 +41,8 @@ export default function ChangePassword () {
             .then(() => {
                 setLoading(false);
 
-                alert('ok!')
+                alert('ok!');
+                history.push("/profile");
             }).catch((err) => {
                 console.log(err);
                 setLoading(false);
@@ -60,10 +61,9 @@ export default function ChangePassword () {
                 </Button>
                 <input
                     placeholder="old password"
-                    type="text"
+                    type="password"
                     value={oldPassword}
                     onChange={(e) => setOldPassword(e.target.value)}
-                    disabled
                 />
                 <input
                     placeholder="new password"
