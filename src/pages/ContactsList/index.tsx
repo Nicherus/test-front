@@ -2,8 +2,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as Yup from "yup";
+import ContactCard from '../../components/ContactCard';
 
-import { Button, Container, Form, Text } from './styles';
+import { Button, Container, Form, Row } from './styles';
 
 export default function ContactsList () {
     const history = useHistory();
@@ -30,14 +31,29 @@ export default function ContactsList () {
         });
     }, [id, token]);
 
+
+    function handleAddNewContact () {
+        // do stuff
+    }
+
     return (
         <Container>
             <Form>
-                <Button type="button" onClick={() => history.push("/")} disabled={loading}>
-                    go back
-                </Button>
-                <Button type="button" onClick={() => history.push("/profile")} disabled={loading}>
-                    Profile
+                <Row>
+                    <Button type="button" onClick={() => history.push("/")} disabled={loading}>
+                        go back
+                    </Button>
+                    <Button type="button" onClick={() => history.push("/profile")} disabled={loading}>
+                        profile
+                    </Button>
+                </Row>
+                {
+                    contactsArray.length > 0 ? 
+                        contactsArray.map((contact: any) => <ContactCard key={contact.id} data={contact}/>)
+                    : null
+                }
+                <Button type="button" onClick={() => handleAddNewContact()} disabled={loading}>
+                    add new contact
                 </Button>
             </Form>
         </Container>

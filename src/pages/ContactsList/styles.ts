@@ -63,3 +63,11 @@ export const Container = styled.div`
 
     background-color: #000000;
 `;
+
+export const Row = styled.div`
+    display: flex;
+    flex-direction: Row;
+    justify-content: space-between;
+
+    width: 100%;
+`;
