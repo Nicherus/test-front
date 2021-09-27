@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as Yup from "yup";
 
 import UserContext from '../../contexts/UserContext';
-import { Button, Container, Form, Text } from './styles';
+import { Button, Container, Form, Text, Row } from './styles';
 
 export default function Profile () {
     const history = useHistory();
@@ -20,8 +21,8 @@ export default function Profile () {
     const [loading, setLoading] = useState(false);
 
     const validationSchemaEditProfile = Yup.object({
-        email: Yup.string().email().required('email is required'),
-        phone: Yup.number().required('phone is required').typeError('only numbers allowed for the phone')
+        email: Yup.string().email().required('Email is required'),
+        phone: Yup.number().required('Phone is required').typeError('Only numbers allowed for the phone')
     });
 
     useEffect(() => {
@@ -35,7 +36,8 @@ export default function Profile () {
             setEmail(data.email);
             setPhone(data.phone);
         }).catch((error) => {
-            console.log(error);
+            history.push('/')
+            alert(error.response.data);
         });
     }, [id]);
 
@@ -55,11 +57,12 @@ export default function Profile () {
             .then(({ data }) => {
                 setLoading(false);
 
-                alert('ok!')
+                alert('Your profile has been edited successfully');
+
                 setEmail(data.email);
                 setPhone(data.phone);
-            }).catch((err) => {
-                console.log(err);
+            }).catch((error) => {
+                alert(error.response.data);
                 setLoading(false);
             });
         } catch (err: any){
@@ -78,8 +81,8 @@ export default function Profile () {
             alert("user deleted!");
 
             history.push("/")
-        }).catch((err) => {
-            console.log(err);
+        }).catch((error) => {
+            alert(error.response.data);
             setLoading(false);
         });
     }
@@ -98,9 +101,14 @@ export default function Profile () {
     return (
         <Container>
             <Form>
-                <Button type="button" onClick={() => history.push("/contacts")} disabled={loading}>
-                    go back
-                </Button>
+                <Row>
+                    <Button type="button" onClick={() => history.push("/contacts")} disabled={loading}>
+                        go back
+                    </Button>
+                    <Button type="button" onClick={() => handleLogout()} disabled={loading}>
+                        logout
+                    </Button>
+                </Row>
                 <input
                     placeholder="username"
                     type="text"
@@ -122,20 +130,17 @@ export default function Profile () {
                     onChange={(e) => setPhone(e.target.value)}
                     required
                 />
-                <Button type="button" onClick={() => handleEditProfile()} disabled={loading}>
-                    edit
-                </Button>
-                <Button type="button" onClick={() => handleLogout()} disabled={loading}>
-                    logout
-                </Button>
-                <Button type="button" onClick={() => handleChangePassword()} disabled={loading}>
+                <Button type="button" onClick={() => handleChangePassword()} width="100%" disabled={loading}>
                     change password
                 </Button>
+                <Button type="button" onClick={() => handleEditProfile()} width="100%" disabled={loading}>
+                    edit profile
+                </Button>
                 <Text>
-                    Do you want to delete your account?
+                    Do you want to delete your account? (irreversible)
                 </Text>
                 <Button type="button" onClick={() => handleDeleteUser()} disabled={loading}>
-                    delete
+                    delete account
                 </Button>
             </Form>
         </Container>

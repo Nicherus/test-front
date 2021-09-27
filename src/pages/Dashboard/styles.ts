@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Navbar = styled.nav`
+export const Header = styled.div`
     background-color: rgba(20, 20, 20, 0.8);
     height: 100px;
     font-size: 3rem;
@@ -13,7 +13,6 @@ export const Navbar = styled.nav`
 `;
 
 export const Container = styled.div`
-    width: 100%;
     height: calc(100vh - 100px);
 
     display: flex;
@@ -23,7 +22,7 @@ export const Container = styled.div`
     background-color: #000000;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<any>`
     background-color: #2AD0D2;
     font-size: 2.8rem;
     padding: 75px;
@@ -31,8 +30,12 @@ export const Button = styled.button`
     color: black;
     margin: 10%;
     cursor: pointer;
-    border: 0;
+    border-style: solid;
+    border-color: white;
+    border-width: ${(props) => props.borderWidth || '0'};
     height: 56px;
+    opacity: ${(props) => props.opacity || '1'};
+
     transition: all 0.2s;
 
     display: flex;
@@ -42,4 +45,9 @@ export const Button = styled.button`
     :hover {
         filter: brightness(0.6);
     }
+`;
+
+export const Column = styled.div`
+    display: flex;
+    flex-direction: column;
 `;

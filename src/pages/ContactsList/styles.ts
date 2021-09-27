@@ -1,16 +1,30 @@
 import styled from "styled-components";
 
-export const Form = styled.form`
+
+export const InnerContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
-    margin: 10rem 10rem;
+`;
+
+export const ContactsCardsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    min-height: 20vh;
+    min-width: 30vw;
+`;
+
+export const Form = styled.form`
+    margin: 1rem 0 4rem 0;
 
     input {
         border-style: none;
-        width: 18rem;
+        width: 100%;
         height: 3rem;
         margin: 0.5rem 0;
         border-radius: 0.5rem;
@@ -26,16 +40,18 @@ export const Form = styled.form`
     }
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<any>`
     background-color: #2AD0D2;
     font-size: 2rem;
     padding: 25px;
-    margin: 10px;
+    margin: 10px 0;
     border-radius: 20px;
     color: black;
     cursor: pointer;
     border: 0;
     height: 56px;
+    width: ${(props) => props.width || 'auto'};
+
     transition: all 0.2s;
 
     display: flex;
@@ -48,9 +64,12 @@ export const Button = styled.button`
 `;
 
 export const Text = styled.div`
+    text-align: center;
     color: white;
     font-size: 1.2rem;
-    margin: 3rem 0 1rem 0;
+    line-height: 2rem;
+
+    margin: 10rem 0;
 `;
 
 export const Container = styled.div`
@@ -60,6 +79,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     background-color: #000000;
 `;

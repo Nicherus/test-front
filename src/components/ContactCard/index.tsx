@@ -22,11 +22,11 @@ export default function ContactCard ({data}: any) {
         axios.delete(`${process.env.REACT_APP_API_BASE_URL}/contacts/${data.id}`, { headers: { 'X-Access-Token': token }}).then(({ data }) => {
             setLoading(false);
 
-            alert("contact deleted!");
+            alert("contact has been deleted successfully");
 
             window.location.reload();
-        }).catch((err) => {
-            console.log(err);
+        }).catch((error) => {
+            alert(error.response.data);
             setLoading(false);
         });
     }

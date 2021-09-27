@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import * as Yup from "yup";
 import ContactCard from '../../components/ContactCard';
 
-import { Button, Container, Form, Row, Text } from './styles';
+import { Button, ContactsCardsContainer, Container, Form, InnerContainer, Row, Text } from './styles';
 
 export default function ContactsList () {
     const history = useHistory();
@@ -21,9 +21,9 @@ export default function ContactsList () {
     const [loading, setLoading] = useState(false);
 
     const validationSchemaCreateContact = Yup.object({
-        name: Yup.string().required('name is required'),
-        email: Yup.string().email().required('email is required'),
-        phone: Yup.number().required('phone is required').typeError('only numbers allowed for the phone')
+        name: Yup.string().required('Name is required'),
+        email: Yup.string().email().required('Email is required'),
+        phone: Yup.number().required('Phone is required').typeError('Only numbers allowed for the phone')
     });
 
     useEffect(() => {
@@ -33,11 +33,9 @@ export default function ContactsList () {
         .then(({data}) => {
             setLoading(false);
             setContactsArray(() => data);
-
-            console.log(data);
         }).catch((error) => {
             setLoading(false);
-            console.log(error);
+            alert(error.response.data);
         });
     }, [id, token]);
 
@@ -60,11 +58,11 @@ export default function ContactsList () {
             .then(({ data }) => {
                 setLoading(false);
 
-                alert('contact created!');
+                alert('contact created');
 
                 window.location.reload();
-            }).catch((err) => {
-                console.log(err);
+            }).catch((error) => {
+                alert(error.response.data);
                 setLoading(false);
             });
         } catch (err: any){
@@ -75,7 +73,7 @@ export default function ContactsList () {
 
     return (
         <Container>
-            <Form>
+            <InnerContainer>
                 <Row>
                     <Button type="button" onClick={() => history.push("/")} disabled={loading}>
                         go back
@@ -84,39 +82,41 @@ export default function ContactsList () {
                         profile
                     </Button>
                 </Row>
-                {
-                    showContactForm ? 
-                        <Form>
-                            <input
-                                placeholder="name"
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                            <input
-                                placeholder="e-mail"
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                            <input
-                                placeholder="phone"
-                                type="tel"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                required
-                            />
-                        </Form>
-                    :
-                    contactsArray.length > 0 ? 
-                        contactsArray.map((contact: any) => <ContactCard key={contact.id} data={contact}/>)
-                    : <Text>"No contacts available, create a new one using the button below"</Text>
-                }
-                <Button type="button" onClick={() => !showContactForm ? setShowContactForm(true) : handleAddNewContact()} disabled={loading}>
+                <ContactsCardsContainer>
+                    {
+                        showContactForm ? 
+                            <Form>
+                                <input
+                                    placeholder="name"
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                                <input
+                                    placeholder="e-mail"
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                                <input
+                                    placeholder="phone"
+                                    type="tel"
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    required
+                                />
+                            </Form>
+                        :
+                        contactsArray.length > 0 ? 
+                            contactsArray.map((contact: any) => <ContactCard key={contact.id} data={contact}/>)
+                        : <Text>no contacts available<br/>create a new one using the button below</Text>
+                    }
+                </ContactsCardsContainer>
+                <Button type="button" onClick={() => !showContactForm ? setShowContactForm(true) : handleAddNewContact()} width="100%" disabled={loading}>
                     {!showContactForm ? 'add new contact' : 'create'}
                 </Button>
-            </Form>
+            </InnerContainer>
         </Container>
     );
 }

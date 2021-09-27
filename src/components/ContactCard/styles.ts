@@ -6,7 +6,8 @@ export const ContainerCard = styled.div`
     justify-content: space-between;
     flex-direction: row;
 
-    width: 25vw;
+    width: 100%;
+    border-radius: 10px;
 
     background-color: azure;
 
@@ -35,13 +36,14 @@ export const Button = styled.button`
 `;
 
 export const Text = styled.div`
+    font-size: 1.2rem;
+    line-height: 1.5rem;
     color: black;
 `;
 
 export const Column = styled.div`
     display: flex;
     flex-direction: column;
-    margin-right: 20px;
 `;
 
 export const Row = styled.div`

@@ -10,7 +10,7 @@ export const Form = styled.form`
 
     input {
         border-style: none;
-        width: 18rem;
+        width: 100%;
         height: 3rem;
         margin: 0.5rem 0;
         border-radius: 0.5rem;
@@ -26,16 +26,18 @@ export const Form = styled.form`
     }
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<any>`
     background-color: #2AD0D2;
     font-size: 2rem;
     padding: 25px;
-    margin: 10px;
+    margin: 10px 0;
     border-radius: 20px;
     color: black;
     cursor: pointer;
     border: 0;
     height: 56px;
+    width: ${(props) => props.width || 'auto'};
+
     transition: all 0.2s;
 
     display: flex;
@@ -50,7 +52,7 @@ export const Button = styled.button`
 export const Text = styled.div`
     color: white;
     font-size: 1.2rem;
-    margin: 3rem 0 1rem 0;
+    padding: 8rem 0 1rem 0;
 `;
 
 export const Container = styled.div`
@@ -62,4 +64,12 @@ export const Container = styled.div`
     align-items: center;
 
     background-color: #000000;
+`;
+
+export const Row = styled.div`
+    display: flex;
+    flex-direction: Row;
+    justify-content: space-between;
+
+    width: 100%;
 `;

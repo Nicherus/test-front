@@ -19,15 +19,15 @@ export default function LoginRegisterForm () {
     const [showRegister, setShowRegister] = useState(false);
 
     const validationSchemaLogin = Yup.object({
-        username: Yup.string().required('username is required'),
-        password: Yup.string().required('password is required')
+        username: Yup.string().required('Username is required'),
+        password: Yup.string().min(6).required('Password is required')
     });
 
     const validationSchemaRegister = Yup.object({
-        username: Yup.string().required('username is required'),
-        password: Yup.string().min(6).required('password is required'),
-        email: Yup.string().email().required('email is required'),
-        phone: Yup.number().required().typeError('only numbers allowed for the phone')
+        username: Yup.string().required('Username is required'),
+        password: Yup.string().min(6).required('Password is required'),
+        email: Yup.string().email().required('Email is required'),
+        phone: Yup.number().required().typeError('Only numbers allowed for the phone')
     });
 
 
@@ -45,19 +45,20 @@ export default function LoginRegisterForm () {
                 password,
             }).then(({ data }) => {
                 setLoading(false);
-    
+
                 localStorage.setItem('userId', data.id);
                 localStorage.setItem('token', data.token);
                 setUserId(data.id);
                 setToken(data.token);
-    
+
                 history.push('/contacts');
-            }).catch((err) => {
-                console.log(err);
+            }).catch((error) => {
+                alert(error.response.data);
                 setLoading(false);
             });
         } catch (err: any){
             setLoading(false);
+
             alert(err.inner[0].message);
         }
     }

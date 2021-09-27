@@ -6,13 +6,13 @@ export const Form = styled.form`
     justify-content: center;
     flex-direction: column;
 
-    margin: 10rem 10rem;
+    margin-right: 5rem;
 
     input {
         border-style: none;
-        width: 18rem;
+        width: 30rem;
         height: 3rem;
-        margin: 0.5rem 0;
+        margin: 1rem 0;
         border-radius: 0.5rem;
         padding: 1rem;
         font-size: 1.1rem;
@@ -31,6 +31,7 @@ export const Button = styled.button`
     cursor: pointer;
     border: 0;
     height: 56px;
+    width: 100%;
     transition: all 0.2s;
 
     display: flex;
@@ -43,6 +44,7 @@ export const Button = styled.button`
 `;
 
 export const ResultDiv = styled.div`
-    margin: 1rem;
+    text-align: center;
+    font-size: 1.6rem;
     color: white;
 `;

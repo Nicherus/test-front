@@ -19,9 +19,9 @@ export default function EditContact (props: any) {
     const [loading, setLoading] = useState(false);
 
     const validationSchemaEditContact = Yup.object({
-        name: Yup.string().required('name is required'),
-        email: Yup.string().email().required('email is required'),
-        phone: Yup.number().required('phone is required').typeError('only numbers allowed for the phone')
+        name: Yup.string().required('Name is required'),
+        email: Yup.string().email().required('Email is required'),
+        phone: Yup.number().required('Phone is required').typeError('Only numbers allowed for the phone')
     });
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function EditContact (props: any) {
             setPhone(data.phone);
         }).catch((error) => {
             setLoading(false);
-            console.log(error);
+            alert(error.response.data);
         });
     }, [contactId]);
 
@@ -58,11 +58,11 @@ export default function EditContact (props: any) {
             .then(({ data }) => {
                 setLoading(false);
 
-                alert('contact edited!');
+                alert('contact has been edited successfully');
 
                 history.push("/contacts")
-            }).catch((err) => {
-                console.log(err);
+            }).catch((error) => {
+                alert(error.response.data);
                 setLoading(false);
             });
         } catch (err: any){
@@ -98,7 +98,7 @@ export default function EditContact (props: any) {
                     required
                 />
                 <Button type="button" onClick={() => handleEditContact()} disabled={loading}>
-                    edit
+                    confirm edit
                 </Button>
             </Form>
         </Container>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import BracketsTester from '../../components/BracketsTester';
-import { Button, Container, Navbar } from './styles';
+import { Button, Column, Container, Header } from './styles';
 import LoginRegisterForm from '../../components/LoginRegisterForm';
 
 export default function Dashboard () {
@@ -26,11 +26,13 @@ export default function Dashboard () {
 
   return (
     <>
-      <Navbar>Bravi Dashboard</Navbar>
+      <Header>Bravi Dashboard</Header>
       <Container>
         {showLoginRegister ? <LoginRegisterForm/> : null}
-        <Button onClick={() => handleShowLoginRegister()}>Contacts List</Button>
-        <Button onClick={() => handleShowBracketsTester()}>Brackets Tester</Button>
+        <Column>  
+          <Button onClick={() => handleShowLoginRegister()} borderWidth={showLoginRegister ? '5px' : '0'} opacity={showLoginRegister ? '0.6' : '1'}>Contacts List</Button>
+          <Button onClick={() => handleShowBracketsTester()} borderWidth={showBracketsTester ? '5px' : '0'} opacity={showBracketsTester ? '0.6' : '1'}>Brackets Tester</Button>
+        </Column>
         {showBracketsTester ? <BracketsTester/> : null}
       </Container>
     </>

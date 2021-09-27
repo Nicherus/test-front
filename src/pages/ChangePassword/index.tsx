@@ -18,9 +18,9 @@ export default function ChangePassword () {
     const [loading, setLoading] = useState(false);
 
     const validationSchemaEditProfile = Yup.object({
-        oldPassword: Yup.string().min(6).required('old password is required'),
-        newPassword: Yup.string().min(6).required('new password is required'),
-        newPasswordConfirmation: Yup.string().min(6).required('password is required')
+        oldPassword: Yup.string().min(6).required('Old password is required'),
+        newPassword: Yup.string().min(6).required('New password is required'),
+        newPasswordConfirmation: Yup.string().min(6).required('Password is required')
             .oneOf([Yup.ref('newPassword'), null], 'Passwords must match'),
     });
 
@@ -41,10 +41,10 @@ export default function ChangePassword () {
             .then(() => {
                 setLoading(false);
 
-                alert('ok!');
+                alert('Your password has been changed successfully');
                 history.push("/profile");
-            }).catch((err) => {
-                console.log(err);
+            }).catch((error) => {
+                alert(error.response.data);
                 setLoading(false);
             });
         } catch (err: any){
