@@ -21,7 +21,7 @@ export const Form = styled.form`
         outline: none;
         
         :disabled {
-            background-color: white;
+            background-color: #B2B0B0;
         }
     }
 `;
