@@ -34,7 +34,7 @@ export default function ChangePassword () {
                 newPasswordConfirmation
             }, { abortEarly: false })
 
-            axios.put(`http://localhost:3001/user/password/${id}`, {
+            axios.put(`${process.env.REACT_APP_API_BASE_URL}/user/password/${id}`, {
                 oldPassword,
                 newPassword,
             }, { headers: { 'X-Access-Token': token }})

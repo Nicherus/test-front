@@ -40,7 +40,7 @@ export default function LoginRegisterForm () {
                 password
             }, { abortEarly: false })
 
-            axios.post(`http://localhost:3001/user/login`, {
+            axios.post(`${process.env.REACT_APP_API_BASE_URL}/user/login`, {
                 username,
                 password,
             }).then(({ data }) => {
@@ -73,7 +73,7 @@ export default function LoginRegisterForm () {
                 phone
             }, { abortEarly: false });
         
-            axios.post(`http://localhost:3001/user/register`, {
+            axios.post(`${process.env.REACT_APP_API_BASE_URL}/user/register`, {
                 username,
                 password,
                 email,

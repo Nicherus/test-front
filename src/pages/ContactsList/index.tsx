@@ -29,7 +29,7 @@ export default function ContactsList () {
     useEffect(() => {
         setLoading(true);
 
-        axios.get(`http://localhost:3001/contacts/${id}`, { headers: { 'X-Access-Token': token }})
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/contacts/${id}`, { headers: { 'X-Access-Token': token }})
         .then(({data}) => {
             setLoading(false);
             setContactsArray(() => data);
@@ -52,7 +52,7 @@ export default function ContactsList () {
                 phone
             }, { abortEarly: false })
 
-            axios.post(`http://localhost:3001/contacts/${id}`, {
+            axios.post(`${process.env.REACT_APP_API_BASE_URL}/contacts/${id}`, {
                 name,
                 email,
                 phone

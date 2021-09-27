@@ -19,7 +19,7 @@ export default function ContactCard ({data}: any) {
     function handleDeleteContact () {
         setLoading(true);
 
-        axios.delete(`http://localhost:3001/contacts/${data.id}`, { headers: { 'X-Access-Token': token }}).then(({ data }) => {
+        axios.delete(`${process.env.REACT_APP_API_BASE_URL}/contacts/${data.id}`, { headers: { 'X-Access-Token': token }}).then(({ data }) => {
             setLoading(false);
 
             alert("contact deleted!");

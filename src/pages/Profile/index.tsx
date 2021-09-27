@@ -27,7 +27,7 @@ export default function Profile () {
     useEffect(() => {
         setLoading(true);
 
-        axios.get(`http://localhost:3001/user/${id}`)
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/user/${id}`)
         .then(({data}) => {
             setLoading(false);
 
@@ -48,7 +48,7 @@ export default function Profile () {
                 phone
             }, { abortEarly: false })
 
-            axios.put(`http://localhost:3001/user/${id}`, {
+            axios.put(`${process.env.REACT_APP_API_BASE_URL}/user/${id}`, {
                 email,
                 phone
             }, { headers: { 'X-Access-Token': token }})
@@ -71,7 +71,7 @@ export default function Profile () {
     function handleDeleteUser () {
         setLoading(true);
         
-        axios.delete(`http://localhost:3001/user/${id}`, { headers: { 'X-Access-Token': token }}).then(({ data }) => {
+        axios.delete(`${process.env.REACT_APP_API_BASE_URL}/user/${id}`, { headers: { 'X-Access-Token': token }}).then(({ data }) => {
             setLoading(false);
 
             handleLogout();

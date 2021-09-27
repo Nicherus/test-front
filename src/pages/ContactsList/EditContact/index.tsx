@@ -27,7 +27,7 @@ export default function EditContact (props: any) {
     useEffect(() => {
         setLoading(true);
 
-        axios.get(`http://localhost:3001/contacts/data/${contactId}`, { headers: { 'X-Access-Token': token }})
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/contacts/data/${contactId}`, { headers: { 'X-Access-Token': token }})
         .then(({data}) => {
             setLoading(false);
 
@@ -50,7 +50,7 @@ export default function EditContact (props: any) {
                 phone
             }, { abortEarly: false })
 
-            axios.put(`http://localhost:3001/contacts/${contactId}`, {
+            axios.put(`${process.env.REACT_APP_API_BASE_URL}/contacts/${contactId}`, {
                 name,
                 email,
                 phone

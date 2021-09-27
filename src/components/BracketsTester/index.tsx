@@ -11,7 +11,7 @@ export default function BracketsTester () {
     function sendData() {
         setLoading(true);
 
-        axios.post(`http://localhost:3001/services/brackets`, {
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/services/brackets`, {
             "inputBrackets": inputBrackets
         }).then(({ data }) => {
             setLoading(false);
