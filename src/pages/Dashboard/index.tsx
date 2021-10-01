@@ -26,7 +26,7 @@ export default function Dashboard () {
 
   return (
     <>
-      <Header>Bravi Dashboard</Header>
+      <Header>Dashboard</Header>
       <Container>
         {showLoginRegister ? <LoginRegisterForm/> : null}
         <Column>  
